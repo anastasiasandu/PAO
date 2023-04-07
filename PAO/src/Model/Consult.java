@@ -1,0 +1,66 @@
+package Model;
+
+import java.util.Objects;
+
+public class Consult {
+    private int idConsult;
+    private int pret;
+
+    private String dataConsult;
+
+    public int getIdConsult() {
+        return idConsult;
+    }
+
+    public int getPret() {
+        return pret;
+    }
+
+    public String getDataConsult() {
+        return dataConsult;
+    }
+
+    public void setDataConsult(String dataConsult) {
+        this.dataConsult = dataConsult;
+    }
+
+    public void setIdConsult(int idConsult) {
+        this.idConsult = idConsult;
+    }
+
+    public void setPret(int pret) {
+        this.pret = pret;
+    }
+
+    public Consult() {
+        this(0,0,"");
+    }
+
+    public Consult(int idConsult, int pret, String dataConsult) {
+        this.idConsult = idConsult;
+        this.pret = pret;
+        this.dataConsult = dataConsult;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Consult consult = (Consult) o;
+        return idConsult == consult.idConsult && pret == consult.pret && dataConsult.equals(consult.dataConsult);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idConsult, pret, dataConsult);
+    }
+
+    @Override
+    public String toString() {
+        return "Consult{" +
+                "idConsult=" + idConsult +
+                ", pret=" + pret +
+                ", dataConsult='" + dataConsult + '\'' +
+                '}';
+    }
+}
