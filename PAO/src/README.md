@@ -73,4 +73,4 @@ Clasele Doctor si Pacient mostenesc clasa Persoana
 - In Pacient: ArrayList<String>
 - In Doctor: SortedMap<String, List<Integer>>
 - In Reteta: ArrayList<String>
-- In PacientRepository, DoctorRepository, ConsultRepository, RetetaRepository 
+- In PacientRepository, DoctorRepository, ConsultRepository, RetetaRepository: ArrayList<> 
