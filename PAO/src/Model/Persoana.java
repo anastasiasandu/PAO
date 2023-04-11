@@ -3,12 +3,12 @@ package Model;
 import java.util.Objects;
 
 public class Persoana {
-    private int idPersoana;
-    private String nume;
-    private String prenume;
-    private int varsta;
-    private int sex;
-    private String nrTelefon;
+    protected int idPersoana;
+    protected String nume;
+    protected String prenume;
+    protected int varsta;
+    protected int sex;
+    protected String nrTelefon;
 
     public int getIdPersoana() {
         return idPersoana;
