@@ -8,6 +8,8 @@ public class Pacient extends Persoana {
     private String tipProblema;
     private int nrAlergii;
     private ArrayList<String> listaAlergii = new ArrayList<String>();
+
+
     public int getIdSpital() {
         return idSpital;
     }
@@ -41,6 +43,29 @@ public class Pacient extends Persoana {
 
     public Pacient(int idPersoana, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, String tipProblema, int nrAlergii, ArrayList<String> listaAlergii) {
         super(idPersoana, nume, prenume, varsta, sex, nrTelefon);
+        this.idSpital = idSpital;
+        this.tipProblema = tipProblema;
+        this.nrAlergii = nrAlergii;
+        this.listaAlergii = listaAlergii;
+    }
+
+    public Pacient(int idPersoana, int registrationNo, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, String tipProblema, int nrAlergii, ArrayList<String> listaAlergii) {
+        super(idPersoana, registrationNo, nume, prenume, varsta, sex, nrTelefon);
+        this.idSpital = idSpital;
+        this.tipProblema = tipProblema;
+        this.nrAlergii = nrAlergii;
+        this.listaAlergii = listaAlergii;
+    }
+
+    public Pacient(int idSpital, String tipProblema, int nrAlergii, ArrayList<String> listaAlergii) {
+        this.idSpital = idSpital;
+        this.tipProblema = tipProblema;
+        this.nrAlergii = nrAlergii;
+        this.listaAlergii = listaAlergii;
+    }
+
+    public Pacient(int idPersoana, String nume, String prenume, int varsta, int idSpital, String tipProblema, int nrAlergii, ArrayList<String> listaAlergii) {
+        super(idPersoana, nume, prenume, varsta);
         this.idSpital = idSpital;
         this.tipProblema = tipProblema;
         this.nrAlergii = nrAlergii;

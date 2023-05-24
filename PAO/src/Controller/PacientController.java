@@ -2,24 +2,25 @@ package Controller;
 
 import Model.Pacient;
 import Service.PacientService;
+import config.DatabaseConfiguration;
 
 import java.util.ArrayList;
 
 public class PacientController {
     private PacientService pacientService;
 
-    public PacientController() {
-        this.pacientService = new PacientService();
+    public PacientController(DatabaseConfiguration conection) {
+        this.pacientService = new PacientService(conection);
     }
 
     public Pacient findById(int idPacient) {
         return pacientService.findById(idPacient);
     }
 
-    public boolean addPacient(int idPersoana, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, String tipProblema,  int nrAlergii, ArrayList<String> listaAlergii) {
+    public boolean add(int idPersoana, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, String tipProblema,  int nrAlergii, ArrayList<String> listaAlergii) {
         nume = capitalizeString(nume);
         prenume = capitalizeString(prenume);
-        return pacientService.addPacient(idPersoana, nume, prenume, varsta, sex, nrTelefon, idSpital, tipProblema, nrAlergii, listaAlergii);
+        return pacientService.add(idPersoana, nume, prenume, varsta, sex, nrTelefon, idSpital, tipProblema, nrAlergii, listaAlergii);
     }
 
     private String capitalizeString (String str) {
@@ -27,18 +28,18 @@ public class PacientController {
     }
 
 
-    public boolean updatePacient(int id, int idPersoana, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, String tipProblema, int nrAlergii, ArrayList<String> listaAlergii) {
+    public boolean update(int idPersoana, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, String tipProblema, int nrAlergii, ArrayList<String> listaAlergii) {
         nume = capitalizeString(nume);
         prenume = capitalizeString(prenume);
-        return pacientService.updatePacient(id, idPersoana, nume, prenume, varsta, sex, nrTelefon, idSpital, tipProblema, nrAlergii, listaAlergii);
+        return pacientService.update(idPersoana, nume, prenume, varsta, sex, nrTelefon, idSpital, tipProblema, nrAlergii, listaAlergii);
     }
 
-    public Pacient[] getallPacient() {
-        return pacientService.getallPacient();
+    public Pacient[] getall() {
+        return pacientService.getall();
     }
 
-    public boolean deletePacient(int idPacient) {
-        return pacientService.deletePacient(idPacient);
+    public boolean delete(int idPacient) {
+        return pacientService.delete(idPacient);
     }
 
     public String getProbPacient(int idPacient) {

@@ -3,6 +3,8 @@ package Controller;
 import Model.Doctor;
 import Model.Pacient;
 import Service.DoctorService;
+import Service.PacientService;
+import config.DatabaseConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +13,8 @@ import java.util.SortedMap;
 public class DoctorController {
     private DoctorService doctorService;
 
-    public DoctorController() {
-        this.doctorService = new DoctorService();
+    public DoctorController(DatabaseConfiguration conection) {
+        this.doctorService = new DoctorService(conection);
     }
 
     public Doctor checkDoctor(String probPacient, String zi, int ora) {
@@ -29,8 +31,8 @@ public class DoctorController {
         return doctorService.addDoctor(idPersoana, nume, prenume, varsta, sex, nrTelefon, idSpital, salariu, specializare, programDoctor);
     }
 
-    public Doctor[] getAllDoctors() {
-        return doctorService.getAllDoctors();
+    public Doctor[] getAll() {
+        return doctorService.getAll();
     }
 
     private String capitalizeString (String str) {
@@ -40,14 +42,14 @@ public class DoctorController {
         return doctorService.findById(idDoctor);
     }
 
-    public boolean updateDoctor(int id, int idPersoana, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, int salariu, String specializare, SortedMap<String, List<Integer>> programDoctor) {
+    public boolean update(int idPersoana, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, int salariu, String specializare, SortedMap<String, List<Integer>> programDoctor) {
         nume = capitalizeString(nume);
         prenume = capitalizeString(prenume);
-        return doctorService.updateDoctor(id, idPersoana, nume, prenume, varsta, sex, nrTelefon, idSpital, salariu, specializare, programDoctor);
+        return doctorService.update(idPersoana, nume, prenume, varsta, sex, nrTelefon, idSpital, salariu, specializare, programDoctor);
     }
 
-    public boolean deleteDoctor(int idDoctor) {
-        return doctorService.deleteDoctor(idDoctor);
+    public boolean delete(int idDoctor) {
+        return doctorService.delete(idDoctor);
     }
 
     public Doctor[] getSortedDoctors() {

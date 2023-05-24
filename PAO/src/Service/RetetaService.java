@@ -1,38 +1,48 @@
 package Service;
 
-import Model.Pacient;
+import Model.Consult;
 import Model.Reteta;
-import Repository.PacientRepository;
-import Repository.RetetaRepository;
+import Repository.CRUDRepository;
+import Repository.JDBC.JdbcConsultRepository;
+import Repository.JDBC.JdbcRetetaRepository;
+import Repository.List.RetetaRepository;
+import Util.RegNumberSingleton;
+import config.DatabaseConfiguration;
 
 import java.util.ArrayList;
 
 public class RetetaService {
-    private RetetaRepository retetaRepository;
 
-    public RetetaService() {
-        retetaRepository = new RetetaRepository();
+
+    private CRUDRepository<Reteta> retetaRepository;
+
+    private RegNumberSingleton regNumberSingleton = RegNumberSingleton.getInstance();
+
+    public RetetaService(DatabaseConfiguration conection) {
+        retetaRepository = new JdbcRetetaRepository(conection);
     }
 
-    public boolean addReteta(int idReteta, int idConsult, int idPacient, int nrMedicamente, ArrayList<String> listaMedicamente){
-        Reteta ret = new Reteta(idReteta, idConsult, idPacient, nrMedicamente,  listaMedicamente);
+    public boolean add(int idReteta, int idConsult, int idPacient, int nrMedicamente, ArrayList<String> listaMedicamente){
+        Reteta ret = new Reteta( idReteta, idConsult, idPacient, nrMedicamente,  listaMedicamente);
+        ret.setRegistrationNo(regNumberSingleton.getNextCode());
         return this.retetaRepository.add(ret);
     }
 
-    public boolean updateReteta (int id, int idReteta, int idConsult, int idPacient, int nrMedicamente, ArrayList<String> listaMedicamente) {
-        return this.retetaRepository.updateReteta(id, idReteta, idConsult, idPacient,nrMedicamente, listaMedicamente);
+    public boolean update(int idReteta, int idConsult, int idPacient, int nrMedicamente, ArrayList<String> listaMedicamente) {
+        Reteta ret= new Reteta( idReteta, idConsult, idPacient,nrMedicamente, listaMedicamente);
+        return this.retetaRepository.update(ret);
     }
 
-    public Reteta[] getallReteta() {
-        return this.retetaRepository.getallReteta();
+    public Reteta[] getall() {
+        return this.retetaRepository.getAll();
     }
 
     public Reteta findById(int idReteta) {
         return this.retetaRepository.findById(idReteta);
     }
 
-    public boolean deleteReteta(int idReteta) {
-        return this.retetaRepository.deleteReteta(idReteta);
+    public boolean delete(int idReteta) {
+        return this.retetaRepository.delete(idReteta);
     }
 
 

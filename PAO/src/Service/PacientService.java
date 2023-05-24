@@ -1,27 +1,35 @@
 package Service;
 
 import Model.Pacient;
-import Repository.PacientRepository;
+import Repository.CRUDRepository;
+import Repository.JDBC.JdbcPacientRepository;
+import Repository.List.PacientRepository;
+import Util.RegNumberSingleton;
+import config.DatabaseConfiguration;
 
 import java.util.ArrayList;
 
 public class PacientService {
-    private PacientRepository pacientRepository;
+    private CRUDRepository<Pacient> pacientRepository;
 
-    public PacientService() {
-        pacientRepository = new PacientRepository();
+    private RegNumberSingleton regNumberSingleton = RegNumberSingleton.getInstance();
+
+    public PacientService(DatabaseConfiguration conection) {
+        pacientRepository = new JdbcPacientRepository(conection);
     }
 
-    public boolean addPacient(int idPersoana, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, String tipProblema, int nrAlergii, ArrayList<String> listaAlergii) {
+    public boolean add(int idPersoana, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, String tipProblema, int nrAlergii, ArrayList<String> listaAlergii) {
         Pacient pac = new Pacient(idPersoana, nume, prenume, varsta, sex, nrTelefon, idSpital, tipProblema, nrAlergii, listaAlergii);
+        pac.setRegistrationNo(regNumberSingleton.getNextCode());
         return this.pacientRepository.add(pac);
     }
 
-    public boolean updatePacient(int id, int idPersoana, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, String tipProblema,  int nrAlergii, ArrayList<String> listaAlergii) {
-         return this.pacientRepository.updatePacient(id, idPersoana, nume, prenume, varsta, sex, nrTelefon, idSpital, tipProblema, nrAlergii, listaAlergii);
+    public boolean update(int idPersoana, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, String tipProblema,  int nrAlergii, ArrayList<String> listaAlergii) {
+        Pacient p=new Pacient(idPersoana, nume, prenume, varsta, sex, nrTelefon, idSpital, tipProblema, nrAlergii, listaAlergii);
+        return this.pacientRepository.update(p);
     }
 
-    public Pacient[] getallPacient() {
+    public Pacient[] getall() {
         return this.pacientRepository.getAll();
     }
 
@@ -29,8 +37,8 @@ public class PacientService {
         return this.pacientRepository.findById(idPacient);
     }
 
-    public boolean deletePacient(int idPacient) {
-        return this.pacientRepository.deletePacient(idPacient);
+    public boolean delete(int idPacient) {
+        return this.pacientRepository.delete(idPacient);
     }
 
     public String checkPacient(int idPacient) {

@@ -1,37 +1,36 @@
 package Controller;
 
-import Model.Pacient;
 import Model.Reteta;
-import Service.PacientService;
 import Service.RetetaService;
+import config.DatabaseConfiguration;
 
 import java.util.ArrayList;
 
 public class RetetaController {
     private RetetaService retetaService;
 
-    public RetetaController() {
-        this.retetaService = new RetetaService();
+    public RetetaController(DatabaseConfiguration conection) {
+        this.retetaService = new RetetaService(conection);
     }
 
     public Reteta findById(int idReteta) {
         return retetaService.findById(idReteta);
     }
 
-    public boolean addReteta(int idReteta, int idConsult, int idPacient, int nrMedicamente, ArrayList<String> listaMedicamente) {
-        return retetaService.addReteta(idReteta, idConsult, idPacient, nrMedicamente, listaMedicamente);
+    public boolean add(int idReteta, int idConsult, int idPacient, int nrMedicamente, ArrayList<String> listaMedicamente) {
+        return retetaService.add(idReteta, idConsult, idPacient, nrMedicamente, listaMedicamente);
     }
 
-    public boolean updateReteta(int id, int idReteta, int idConsult, int idPacient, int nrMedicamente, ArrayList<String> listaMedicamente) {
-        return retetaService.updateReteta(id, idReteta, idConsult, idPacient, nrMedicamente, listaMedicamente);
+    public boolean update(int idReteta, int idConsult, int idPacient, int nrMedicamente, ArrayList<String> listaMedicamente) {
+        return retetaService.update(idReteta, idConsult, idPacient, nrMedicamente, listaMedicamente);
     }
 
-    public Reteta[] getallReteta() {
-        return retetaService.getallReteta();
+    public Reteta[] getall() {
+        return retetaService.getall();
     }
 
-    public boolean deleteReteta(int idReteta) {
-        return retetaService.deleteReteta(idReteta);
+    public boolean delete(int idReteta) {
+        return retetaService.delete(idReteta);
     }
 
 

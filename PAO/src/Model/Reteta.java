@@ -5,11 +5,19 @@ import java.util.Objects;
 
 public class Reteta {
     private int idReteta;
+
+    int registrationNo;
     private int idConsult;
     private int idPacient;
 
     private int nrMedicamente;
     private ArrayList<String> listaMedicamente = new ArrayList<String>();
+
+
+
+    public int getRegistrationNo() {
+        return registrationNo;
+    }
 
     public int getIdReteta() {
         return idReteta;
@@ -25,6 +33,10 @@ public class Reteta {
 
     public int getNrMedicamente() {
         return nrMedicamente;
+    }
+
+    public void setRegistrationNo(int registrationNo) {
+        this.registrationNo = registrationNo;
     }
 
     public void setNrMedicamente(int nrMedicamente) {
@@ -51,8 +63,27 @@ public class Reteta {
         this.listaMedicamente = listaMedicamente;
     }
 
-    public Reteta() {
-        this(0,0,0,0,new ArrayList<>());
+    public Reteta(int idReteta, int registrationNo, int idConsult, int idPacient, int nrMedicamente, ArrayList<String> listaMedicamente) {
+        this.idReteta = idReteta;
+        this.registrationNo = registrationNo;
+        this.idConsult = idConsult;
+        this.idPacient = idPacient;
+        this.nrMedicamente = nrMedicamente;
+        this.listaMedicamente = listaMedicamente;
+    }
+
+    public Reteta(int idReteta, int idPacient, ArrayList<String> listaMedicamente) {
+        this.idReteta = idReteta;
+        this.idPacient = idPacient;
+        this.listaMedicamente = listaMedicamente;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reteta reteta = (Reteta) o;
+        return idReteta == reteta.idReteta && registrationNo==reteta.registrationNo && idConsult == reteta.idConsult && idPacient == reteta.idPacient && nrMedicamente == reteta.nrMedicamente && listaMedicamente.equals(reteta.listaMedicamente);
     }
 
     public Reteta(int idReteta, int idConsult, int idPacient, int nrMedicamente, ArrayList<String> listaMedicamente) {
@@ -64,22 +95,15 @@ public class Reteta {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Reteta reteta = (Reteta) o;
-        return idReteta == reteta.idReteta && idConsult == reteta.idConsult && idPacient == reteta.idPacient && nrMedicamente == reteta.nrMedicamente && listaMedicamente.equals(reteta.listaMedicamente);
-    }
-
-    @Override
     public int hashCode() {
-        return Objects.hash(idReteta, idConsult, idPacient, nrMedicamente, listaMedicamente);
+        return Objects.hash(registrationNo, idReteta, idConsult, idPacient, nrMedicamente, listaMedicamente);
     }
 
     @Override
     public String toString() {
         return "Reteta{" +
-                "idReteta=" + idReteta +
+                " idReteta=" + idReteta +
+                ", registrationNo=" + registrationNo +
                 ", idConsult=" + idConsult +
                 ", idPacient=" + idPacient +
                 ", nrMedicamente=" + nrMedicamente +

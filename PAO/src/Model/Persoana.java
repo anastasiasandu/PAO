@@ -3,12 +3,18 @@ package Model;
 import java.util.Objects;
 
 public class Persoana {
-    protected int idPersoana;
-    protected String nume;
-    protected String prenume;
-    protected int varsta;
-    protected int sex;
-    protected String nrTelefon;
+    private int idPersoana;
+
+    int registrationNo;
+    private String nume;
+    private String prenume;
+    private int varsta;
+    private int sex;
+    private String nrTelefon;
+
+    public int getRegistrationNo() {
+        return registrationNo;
+    }
 
     public int getIdPersoana() {
         return idPersoana;
@@ -32,6 +38,10 @@ public class Persoana {
 
     public String getNrTelefon() {
         return nrTelefon;
+    }
+
+    public void setRegistrationNo(int registrationNo) {
+        this.registrationNo = registrationNo;
     }
 
     public void setIdPersoana(int idPersoana) {
@@ -78,6 +88,16 @@ public class Persoana {
         this.nrTelefon = nrTelefon;
     }
 
+    public Persoana( int idPersoana, int registrationNo, String nume, String prenume, int varsta, int sex, String nrTelefon) {
+        this.idPersoana = idPersoana;
+        this.registrationNo = registrationNo;
+        this.nume = nume;
+        this.prenume = prenume;
+        this.varsta = varsta;
+        this.sex = sex;
+        this.nrTelefon = nrTelefon;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -93,17 +113,13 @@ public class Persoana {
 
     @Override
     public String toString() {
-        String s = null;
-        if(sex==0)
-            s ="masculin";
-        else if (sex==1)
-                s="feminin";
         return "Persoana{" +
-                "idPersoana=" + idPersoana +
+                " idPersoana=" + idPersoana +
+                ", registrationNo=" + registrationNo +
                 ", nume='" + nume + '\'' +
                 ", prenume='" + prenume + '\'' +
                 ", varsta=" + varsta +
-                ", sex=" + s + '\'' +
+                ", sex=" + sex +
                 ", nrTelefon='" + nrTelefon + '\'' +
                 '}';
     }

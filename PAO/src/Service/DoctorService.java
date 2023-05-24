@@ -2,39 +2,48 @@ package Service;
 
 import Model.Doctor;
 import Model.Pacient;
-import Repository.DoctorRepository;
+import Repository.CRUDRepository;
+import Repository.JDBC.JdbcDoctorRepository;
+import Repository.JDBC.JdbcPacientRepository;
+import Repository.List.DoctorRepository;
+import Util.RegNumberSingleton;
+import config.DatabaseConfiguration;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
 
 public class DoctorService {
-    private DoctorRepository doctorRepository;
+    private CRUDRepository<Doctor> doctorRepository;
 
-    public DoctorService() {
-        doctorRepository = new DoctorRepository();
+    private RegNumberSingleton regNumberSingleton = RegNumberSingleton.getInstance();
+
+    public DoctorService(DatabaseConfiguration conection) {
+        doctorRepository = new JdbcDoctorRepository(conection);
     }
+
 
     public boolean addDoctor(int idPersoana, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, int salariu, String specializare, SortedMap<String, List<Integer>> programDoctor) {
         Doctor doctor = new Doctor(idPersoana, nume, prenume, varsta, sex, nrTelefon, idSpital, salariu, specializare, programDoctor);
+        doctor.setRegistrationNo(regNumberSingleton.getNextCode());
         return this.doctorRepository.add(doctor);
     }
 
-    public Doctor[] getAllDoctors() {
+    public Doctor[] getAll() {
         return this.doctorRepository.getAll();
     }
 
     public Doctor findById(int idDoctor) {
         return doctorRepository.findById(idDoctor);
     }
-    public boolean updateDoctor(int id, int idPersoana, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, int salariu, String specializare, SortedMap<String, List<Integer>> programDoctor) {
+    public boolean update(int idPersoana, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, int salariu, String specializare, SortedMap<String, List<Integer>> programDoctor) {
         //Pacient pac = new Pacient(idPersoana, nume, prenume, varsta, sex, nrTelefon, idSpital, nrAlergii, listaAlergii);
-        return this.doctorRepository.updateDoctor(id, idPersoana, nume, prenume, varsta, sex, nrTelefon, idSpital, salariu, specializare, programDoctor);
+        Doctor doc= new Doctor(idPersoana, nume, prenume, varsta, sex, nrTelefon, idSpital, salariu, specializare, programDoctor);
+        return this.doctorRepository.update(doc);
     }
 
 
-    public boolean deleteDoctor(int idDoctor) {
-        return this.doctorRepository.deleteDoctor(idDoctor);
+    public boolean delete(int idDoctor) {
+        return this.doctorRepository.delete(idDoctor);
     }
 
     public Doctor checkDoctor(String probPacient, String zi, int ora) {

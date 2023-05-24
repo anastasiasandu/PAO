@@ -61,6 +61,29 @@ public class Doctor extends Persoana{
         this.programDoctor = programDoctor;
     }
 
+    public Doctor(int idPersoana, int registrationNo, String nume, String prenume, int varsta, int sex, String nrTelefon, int idSpital, int salariu, String specializare, SortedMap<String, List<Integer>> programDoctor) {
+        super(idPersoana, registrationNo, nume, prenume, varsta, sex, nrTelefon);
+        this.idSpital = idSpital;
+        this.salariu = salariu;
+        this.specializare = specializare;
+        this.programDoctor = programDoctor;
+    }
+
+    public Doctor(int idSpital, int salariu, String specializare, SortedMap<String, List<Integer>> programDoctor) {
+        this.idSpital = idSpital;
+        this.salariu = salariu;
+        this.specializare = specializare;
+        this.programDoctor = programDoctor;
+    }
+
+    public Doctor(int idPersoana, String nume, String prenume, int varsta, int idSpital, int salariu, String specializare, SortedMap<String, List<Integer>> programDoctor) {
+        super(idPersoana, nume, prenume, varsta);
+        this.idSpital = idSpital;
+        this.salariu = salariu;
+        this.specializare = specializare;
+        this.programDoctor = programDoctor;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
